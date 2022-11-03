@@ -4,7 +4,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
-const name = 'Your Name'
+const name = 'Joseph Ani'
 export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
@@ -30,7 +30,7 @@ export default function Layout({ children, home }) {
           <>
             <Image
               priority
-              src='/images/profile.jpg'
+              src='/images/profile.png'
               className={utilStyles.borderCircle}
               height={144}
               width={144}
@@ -40,10 +40,10 @@ export default function Layout({ children, home }) {
           </>
         ) : (
           <>
-            <Link href='/'>
+            <Link href='/' legacyBehavior>
               <Image
                 priority
-                src='/images/profile.jpg'
+                src='/images/profile.png'
                 className={utilStyles.borderCircle}
                 height={108}
                 width={108}
@@ -51,8 +51,8 @@ export default function Layout({ children, home }) {
               />
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href='/'>
-                <a className={utilStyles.colorInherit}>{name}</a>
+              <Link href='/' className={utilStyles.colorInherit}>
+                {name}
               </Link>
             </h2>
           </>
