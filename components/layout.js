@@ -51,11 +51,7 @@ export default function Layout({ children, home }) {
               />
             </Link>
             <h2 className={utilStyles.headingLg}>
-<<<<<<< HEAD
               <Link href='/' className={utilStyles.colorInherit} legacyBehavior>
-=======
-              <Link href='/' className={utilStyles.colorInherit}>
->>>>>>> 88556fb (packages)
                 {name}
               </Link>
             </h2>
@@ -69,5 +65,5 @@ export default function Layout({ children, home }) {
         </div>
       )}
     </div>
-  );
+  )
 }
