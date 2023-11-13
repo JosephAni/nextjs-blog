@@ -1,37 +1,35 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import ContainerBlock from "../components/ContainerBlock";
+import FavouriteProjects from "../components/FavouriteProjects";
+import LatestCode from "../components/LatestCode";
+import Hero from "../components/Hero";
+import getLatestRepos from "@lib/getLatestRepos";
+import userData from "@constants/data";
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+export default function Home({ repositories }) {
+  return (
+    <ContainerBlock
+      title="Joseph Ani - Developer, Writer, Creator"
+      description="This is a template built specifically for my blog - Creating a developer portfolio that gets you a job."
+    >
+      <Hero />
+      <FavouriteProjects />
+      <LatestCode repositories={repositories} />
+    </ContainerBlock>
+  );
+}
+
+export const getServerSideProps = async () => {
+  console.log(process.env.GITHUB_AUTH_TOKEN);
+  let token = process.env.GITHUB_AUTH_TOKEN;
+
+  const repositories = await getLatestRepos(userData, token);
+  // console.log("REPOSITORIES", repositories);
+
   return {
     props: {
-      allPostsData,
+      repositories,
     },
-  }
-}
-
-export default function Home({ allPostsData }) {
-  return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
-            </li>
-          ))}
-        </ul>
-      </section>
-    </Layout>
-  )
-}
+  };
+};
